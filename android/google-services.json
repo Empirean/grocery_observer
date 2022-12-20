@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "759524647561",
+    "project_id": "groceryobserver",
+    "storage_bucket": "groceryobserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759524647561:android:ebd8772c024770c7771c58",
+        "android_client_info": {
+          "package_name": "com.hamunchi.grocery_observer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759524647561-cc3j20caigdr0h669o2cft20qaivdp1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxu9EuIQTFC_-w-VTJh1fHW-DA5BIBk3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759524647561-cc3j20caigdr0h669o2cft20qaivdp1n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759524647561-vrg5m3kvs2pedjf12ni128ns61qt8h91.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hamunchi.groceryObserver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
