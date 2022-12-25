@@ -23,8 +23,8 @@ class AuthenticationService{
         UserModel.fieldLASTNAME : lastName
       };
 
-      DatabaseService(path: Paths.users).addEntry(data);
-      print("complete");
+      await DatabaseService(path: Paths.users).addEntry(data);
+
     }
     catch(e){
       return e.toString();

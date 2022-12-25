@@ -14,6 +14,7 @@ class UserModel{
   static const String fieldLASTNAME = "LAST_NAME";
   static const String fieldID = "ID";
 
+  /*
   List<UserModel> _mapUserInfo(QuerySnapshot user){
     return user.docs.map((doc){
       return UserModel(
@@ -28,4 +29,5 @@ class UserModel{
   Stream<List<UserModel>> watchOtherUsers({String firebasePath="", String field="", List<String> filter = const []}) {
     return DatabaseService(path: firebasePath).watchDocumentsNotInRange(filter: filter, field: field).map(_mapUserInfo);
   }
+  */
 }

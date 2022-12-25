@@ -23,12 +23,19 @@ class _DashboardState extends State<Dashboard> {
     const Movement()
   ];
 
+  final List<String> _widgetTitles = [
+    "Low Items",
+    "All Items",
+    "Maintenance",
+    "Movement"
+  ];
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(_widgetTitles[_currentIndex]),
         actions: [
           IconButton(
               onPressed: () async {
