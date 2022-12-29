@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grocery_observer/services/database.dart';
 
 class ItemModel{
@@ -15,4 +16,21 @@ class ItemModel{
   static const String fieldThreshold = "THRESHOLD";
   static const String fieldTag = "TAGS";
   static const String fieldUOM = "UOM";
+
+  ItemModel.fromJson(Map<String, Object?> json) :
+      this(
+        name: json[fieldName] as String,
+        amount: json[fieldAmount] as int,
+        threshold: json[fieldThreshold] as int,
+        uom: json[fieldUOM] as String
+      );
+
+  Map<String, Object?> toJson() {
+    return {
+      fieldName : name,
+      fieldAmount : amount,
+      fieldThreshold : threshold,
+      fieldUOM : uom
+    };
+  }
 }
