@@ -4,7 +4,6 @@ import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/services/database.dart';
 
 import '../../../constants/paths.dart';
-import '../../../shared/errorcard.dart';
 import '../../../shared/fields.dart';
 
 class RegisterItem extends StatefulWidget {
@@ -36,6 +35,7 @@ class _RegisterItemState extends State<RegisterItem> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextFormField(
+                maxLength: 30,
                 validator: (val) {
                   return val != null && val.isNotEmpty  ? null : "Item name cannot be empty!";
                 },

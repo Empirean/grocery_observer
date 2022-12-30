@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:grocery_observer/services/database.dart';
-
 class ItemModel{
 
   final String name;

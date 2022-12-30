@@ -10,15 +10,15 @@ class ErrorCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Card(
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: Colors.red,
+            color: Theme.of(context).errorColor,
           ),
         ),
         child: ListTile(
           title: Text(errorText,
-            style: const TextStyle(
-              color: Colors.red,
+            style: TextStyle(
+              color: Theme.of(context).errorColor,
             ),
           ),
         ),

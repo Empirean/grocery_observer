@@ -18,7 +18,7 @@ class DatabaseService {
     return await _ref.doc(id).update(data);
   }
 
-  Future deleteEntry(Map<String, dynamic> data, String id) async {
+  Future deleteEntry(String id) async {
     return await _ref.doc(id).delete();
   }
 

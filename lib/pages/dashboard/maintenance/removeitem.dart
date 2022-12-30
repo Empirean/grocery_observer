@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/services/database.dart';
-import 'package:grocery_observer/shared/itemlisttile.dart';
+import 'package:grocery_observer/services/extensions.dart';
+import 'package:grocery_observer/shared/fields.dart';
 import '../../../constants/paths.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../shared/itemListTile.dart';
 
 class RemoveItem extends StatefulWidget {
   const RemoveItem({Key? key}) : super(key: key);
@@ -14,28 +15,64 @@ class RemoveItem extends StatefulWidget {
 }
 
 class _RemoveItemState extends State<RemoveItem> {
+
+  String _itemName = "";
+
+  final _nameController = TextEditingController();
+  final _globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
 
-    return StreamBuilder<QuerySnapshot<ItemModel>>(
-      stream: DatabaseService(path: Paths.items).getItemModelReference().snapshots(),
-      builder: (context, itemList) {
-        if (itemList.hasData) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          Form(
+            key: _globalKey,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                controller: _nameController,
+                decoration: fieldStyle.copyWith(
+                  hintText: "search",
+                  labelText: "search"
+                ),
+                onChanged: (val) {
+                  setState(() {
+                    _itemName = val;
+                  });
+                },
+              ),
+            ),
+          ),
+          StreamBuilder<QuerySnapshot<ItemModel>>(
+            stream: DatabaseService(path: Paths.items).getItemModelReference().
+              queryBy(ItemQueryModes.itemName, queryText: _itemName).snapshots(),
+            builder: (context, itemList) {
+              if (itemList.hasData) {
 
-          final data = itemList.requireData;
+                final data = itemList.requireData;
 
-          return ListView.builder(
-              itemCount: data.size,
-              itemBuilder: (context, index) {
-                return ItemsListTile(itemModel: ItemModel(
-                      name: data.docs[index][ItemModel.fieldName]
-                ));
+                return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: data.size,
+                    itemBuilder: (context, index) {
+                      return ItemListTile(
+                          itemModel: ItemModel(
+                            name: data.docs[index][ItemModel.fieldName]),
+                          id: data.docs[index].id,
+                      );
+                    }
+                );
               }
-          );
-        }
-        else{
-          return Container();
-        }
-    });
+              else{
+                return Container();
+              }
+          }),
+        ],
+      ),
+    );
   }
 }
