@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/services/database.dart';
+import 'package:grocery_observer/shared/entryMode.dart';
 
 import '../../../constants/paths.dart';
 import '../../../shared/fields.dart';
 
 class RegisterItem extends StatefulWidget {
-  const RegisterItem({Key? key}) : super(key: key);
+  const RegisterItem({Key? key, required this.itemModel, required this.id, required this.mode, }) : super(key: key);
+
+  final ItemModel itemModel;
+  final String id;
+  final EntryMode mode;
 
   @override
   _RegisterItemState createState() => _RegisterItemState();
@@ -15,18 +20,28 @@ class RegisterItem extends StatefulWidget {
 
 class _RegisterItemState extends State<RegisterItem> {
 
-  String _itemName = "";
-  int _itemAmount = 0;
-  int _itemThreshold = 0;
-
+  late String _itemName = "";
+  late int _itemAmount = 0;
+  late int _itemThreshold = 0;
+  late String _unitOfMeasure = "LB";
   final List<String> _unitsOfMeasure = ["LB", "KG", "PC", "ML", "L"];
-  String _unitOfMeasure = "LB";
 
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+
+    if (widget.mode == EntryMode.edit) {
+      setState(() {
+        _itemName = widget.itemModel.name;
+        _itemAmount = widget.itemModel.amount;
+        _itemThreshold = widget.itemModel.threshold;
+        _unitOfMeasure = widget.itemModel.uom;
+        _nameController.text = _itemName;
+      });
+    }
+
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -133,6 +148,8 @@ class _RegisterItemState extends State<RegisterItem> {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () async {
+
+
                       if (_formKey.currentState!.validate()) {
                         Map<String, dynamic> data = {
                           ItemModel.fieldName : _itemName,
@@ -140,8 +157,6 @@ class _RegisterItemState extends State<RegisterItem> {
                           ItemModel.fieldThreshold : _itemThreshold,
                           ItemModel.fieldUOM : _unitOfMeasure
                         };
-
-                        await DatabaseService(path: Paths.items).addEntry(data);
 
                         final snackBar = SnackBar(
                           content: Text("$_itemName added"),
@@ -153,17 +168,22 @@ class _RegisterItemState extends State<RegisterItem> {
                           ),
                         );
 
-                        setState(() {
+                        if (widget.mode == EntryMode.add) {
+                          await DatabaseService(path: Paths.items).addEntry(data);
 
+                          setState(() {
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            _nameController.clear();
+                            _itemName = "";
+                            _itemAmount = 0;
+                            _itemThreshold = 0;
+                            _unitOfMeasure = _unitsOfMeasure[0];
+                          });
+                        }
 
-
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          _nameController.clear();
-                          _itemName = "";
-                          _itemAmount = 0;
-                          _itemThreshold = 0;
-                          _unitOfMeasure = _unitsOfMeasure[0];
-                        });
+                        if (widget.mode == EntryMode.edit) {
+                          await DatabaseService(path: Paths.items).updateEntry(data, widget.id).then((value) => Navigator.pop(context));
+                        }
                       }
                     },
                     child: const Text("Confirm")

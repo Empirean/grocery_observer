@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:grocery_observer/pages/dashboard/maintenance/registeritem.dart';
 import 'package:grocery_observer/services/database.dart';
+import 'package:grocery_observer/shared/entryMode.dart';
 
 import '../constants/paths.dart';
+import '../constants/routes.dart';
 import '../models/item.dart';
 
 class ItemListTile extends StatefulWidget {
@@ -34,6 +37,16 @@ class _ItemListTileState extends State<ItemListTile> {
                 backgroundColor: Theme.of(context).canvasColor,
                 onPressed: (val) {
 
+                  Navigator.pushNamed(context, Routes.sharedScaffold,
+                    arguments: {
+                      "widget" : RegisterItem(
+                        itemModel:widget.itemModel,
+                        id: widget.id,
+                        mode: EntryMode.edit,
+                      ),
+                      "title" : "Edit Item"
+                    }
+                  );
                 },
             ),
             SlidableAction(

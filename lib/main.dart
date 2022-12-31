@@ -5,8 +5,10 @@ import 'package:grocery_observer/pages/dashboard/dashboard.dart';
 import 'package:grocery_observer/pages/dashboard/items/items.dart';
 import 'package:grocery_observer/pages/dashboard/lowitems/lowitems.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/maintenance.dart';
+import 'package:grocery_observer/pages/dashboard/maintenance/registeritem.dart';
 import 'package:grocery_observer/pages/dashboard/movement/movement.dart';
 import 'package:grocery_observer/services/authentication.dart';
+import 'package:grocery_observer/shared/sharedScaffold.dart';
 import 'package:grocery_observer/shared/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Routes.dashboard : (context) => const Dashboard(),
           Routes.movement : (context) => const Movement(),
           Routes.maintenance : (context) => const Maintenance(),
-          Routes.allItems : (context) => const Items()
+          Routes.allItems : (context) => const Items(),
+          Routes.sharedScaffold : (context) => const SharedScaffold()
         },
       ),
     );

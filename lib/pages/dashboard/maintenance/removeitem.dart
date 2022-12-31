@@ -61,7 +61,11 @@ class _RemoveItemState extends State<RemoveItem> {
                     itemBuilder: (context, index) {
                       return ItemListTile(
                           itemModel: ItemModel(
-                            name: data.docs[index][ItemModel.fieldName]),
+                            name: data.docs[index][ItemModel.fieldName],
+                            amount: data.docs[index][ItemModel.fieldAmount],
+                            threshold: data.docs[index][ItemModel.fieldThreshold],
+                            uom: data.docs[index][ItemModel.fieldUOM]
+                          ),
                           id: data.docs[index].id,
                       );
                     }

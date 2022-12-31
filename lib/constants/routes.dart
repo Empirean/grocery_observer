@@ -4,4 +4,5 @@ class Routes{
   static const String allItems = "/allItems";
   static const String maintenance = "/maintenance";
   static const String movement = "/movement";
+  static const String sharedScaffold = "/addItem";
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/registeritem.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/removeitem.dart';
+import 'package:grocery_observer/shared/entryMode.dart';
 
 class Maintenance extends StatefulWidget {
   const Maintenance({Key? key}) : super(key: key);
@@ -13,9 +15,13 @@ class _MaintenanceState extends State<Maintenance> {
 
   int _selectedIndex = 0;
 
-  static const List _pageList = [
-    RegisterItem(),
-    RemoveItem()
+  static final List _pageList = [
+    RegisterItem(
+      id: "",
+      itemModel: ItemModel(),
+      mode: EntryMode.add,
+    ),
+    const RemoveItem()
   ];
 
   @override
