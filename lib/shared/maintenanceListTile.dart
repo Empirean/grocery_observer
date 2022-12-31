@@ -8,17 +8,17 @@ import '../constants/paths.dart';
 import '../constants/routes.dart';
 import '../models/item.dart';
 
-class ItemListTile extends StatefulWidget {
-  const ItemListTile({Key? key, required this.itemModel, required this.id}) : super(key: key);
+class MaintenanceListTile extends StatefulWidget {
+  const MaintenanceListTile({Key? key, required this.itemModel, required this.id}) : super(key: key);
 
   final String id;
   final ItemModel itemModel;
 
   @override
-  _ItemListTileState createState() => _ItemListTileState();
+  _MaintenanceListTileState createState() => _MaintenanceListTileState();
 }
 
-class _ItemListTileState extends State<ItemListTile> {
+class _MaintenanceListTileState extends State<MaintenanceListTile> {
 
 
   @override
@@ -68,6 +68,12 @@ class _ItemListTileState extends State<ItemListTile> {
           title: Text(widget.itemModel.name,
             style: TextStyle(
               color: Theme.of(context).canvasColor
+            ),
+          ),
+          subtitle: Text("Remaining: ${widget.itemModel.amount.toString()} ${widget.itemModel.uom}/ Threshold: ${widget.itemModel.threshold.toString()} ${widget.itemModel.uom}",
+            textAlign: TextAlign.end,
+            style: TextStyle(
+                color: Theme.of(context).canvasColor
             ),
           ),
         ),

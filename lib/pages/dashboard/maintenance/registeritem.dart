@@ -37,7 +37,7 @@ class _RegisterItemState extends State<RegisterItem> {
         _itemName = widget.itemModel.name;
         _itemAmount = widget.itemModel.amount;
         _itemThreshold = widget.itemModel.threshold;
-        _unitOfMeasure = widget.itemModel.uom;
+        _unitOfMeasure = widget.itemModel.uom ?? "LB";
         _nameController.text = _itemName;
       });
     }
@@ -62,6 +62,7 @@ class _RegisterItemState extends State<RegisterItem> {
                 onChanged: (val) {
                   _itemName = val;
                 },
+
               ),
             ),
             Row(
@@ -148,7 +149,6 @@ class _RegisterItemState extends State<RegisterItem> {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () async {
-
 
                       if (_formKey.currentState!.validate()) {
                         Map<String, dynamic> data = {

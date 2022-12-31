@@ -5,7 +5,7 @@ import 'package:grocery_observer/services/extensions.dart';
 import 'package:grocery_observer/shared/fields.dart';
 import '../../../constants/paths.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../shared/itemListTile.dart';
+import '../../../shared/maintenanceListTile.dart';
 
 class RemoveItem extends StatefulWidget {
   const RemoveItem({Key? key}) : super(key: key);
@@ -36,7 +36,16 @@ class _RemoveItemState extends State<RemoveItem> {
                 controller: _nameController,
                 decoration: fieldStyle.copyWith(
                   hintText: "search",
-                  labelText: "search"
+                  labelText: "search",
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _itemName = "";
+                            _nameController.clear();
+                          });
+                        },
+                        icon: _itemName.isNotEmpty ? const Icon(Icons.cancel) : Container()
+                    )
                 ),
                 onChanged: (val) {
                   setState(() {
@@ -54,22 +63,29 @@ class _RemoveItemState extends State<RemoveItem> {
 
                 final data = itemList.requireData;
 
-                return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: data.size,
-                    itemBuilder: (context, index) {
-                      return ItemListTile(
+                if (data.size > 0) {
+                  return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return MaintenanceListTile(
                           itemModel: ItemModel(
-                            name: data.docs[index][ItemModel.fieldName],
-                            amount: data.docs[index][ItemModel.fieldAmount],
-                            threshold: data.docs[index][ItemModel.fieldThreshold],
-                            uom: data.docs[index][ItemModel.fieldUOM]
+                              name: data.docs[index][ItemModel.fieldName],
+                              amount: data.docs[index][ItemModel.fieldAmount],
+                              threshold: data.docs[index][ItemModel.fieldThreshold],
+                              uom: data.docs[index][ItemModel.fieldUOM]
                           ),
                           id: data.docs[index].id,
-                      );
-                    }
-                );
+                        );
+                      }
+                  );
+                }
+                else{
+                  return const Center(
+                    child: Text("No Items Found"),
+                  );
+                }
               }
               else{
                 return Container();
