@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/services/database.dart';
-import 'package:grocery_observer/shared/entryMode.dart';
+import 'package:grocery_observer/constants/entryMode.dart';
 
 import '../../../constants/paths.dart';
-import '../../../shared/fields.dart';
+import '../../../shared/sharedDecoration.dart';
 
 class RegisterItem extends StatefulWidget {
   const RegisterItem({Key? key, required this.itemModel, required this.id, required this.mode, }) : super(key: key);
@@ -28,17 +28,21 @@ class _RegisterItemState extends State<RegisterItem> {
 
   final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isInhibited = false;
 
   @override
   Widget build(BuildContext context) {
 
     if (widget.mode == EntryMode.edit) {
       setState(() {
-        _itemName = widget.itemModel.name;
-        _itemAmount = widget.itemModel.amount;
-        _itemThreshold = widget.itemModel.threshold;
-        _unitOfMeasure = widget.itemModel.uom ?? "LB";
-        _nameController.text = _itemName;
+        if (!_isInhibited) {
+          _itemName = widget.itemModel.name;
+          _itemAmount = widget.itemModel.amount;
+          _itemThreshold = widget.itemModel.threshold;
+          _unitOfMeasure = widget.itemModel.uom;
+          _nameController.text = _itemName;
+          _isInhibited = true;
+        }
       });
     }
 
@@ -113,10 +117,10 @@ class _RegisterItemState extends State<RegisterItem> {
                               );
                             }).toList(),
                             onChanged: (val) {
+
                               setState(() {
                                 _unitOfMeasure = val.toString();
                               });
-
                             }
                           ),
                         ),
@@ -155,7 +159,8 @@ class _RegisterItemState extends State<RegisterItem> {
                           ItemModel.fieldName : _itemName,
                           ItemModel.fieldAmount : _itemAmount,
                           ItemModel.fieldThreshold : _itemThreshold,
-                          ItemModel.fieldUOM : _unitOfMeasure
+                          ItemModel.fieldUOM : _unitOfMeasure,
+                          ItemModel.fieldTag : ItemModel.getTag(amount: _itemAmount, threshold: _itemThreshold)
                         };
 
                         final snackBar = SnackBar(

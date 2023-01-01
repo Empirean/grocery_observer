@@ -5,11 +5,10 @@ import 'package:grocery_observer/pages/dashboard/dashboard.dart';
 import 'package:grocery_observer/pages/dashboard/items/items.dart';
 import 'package:grocery_observer/pages/dashboard/lowitems/lowitems.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/maintenance.dart';
-import 'package:grocery_observer/pages/dashboard/maintenance/registeritem.dart';
 import 'package:grocery_observer/pages/dashboard/movement/movement.dart';
 import 'package:grocery_observer/services/authentication.dart';
 import 'package:grocery_observer/shared/sharedScaffold.dart';
-import 'package:grocery_observer/shared/themes.dart';
+import 'package:grocery_observer/shared/sharedThemes.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/routes.dart';

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:grocery_observer/models/item.dart';
 import 'package:grocery_observer/services/database.dart';
 import 'package:grocery_observer/services/extensions.dart';
-import 'package:grocery_observer/shared/fields.dart';
+import 'package:grocery_observer/shared/sharedDecoration.dart';
 import '../../../constants/paths.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../shared/maintenanceListTile.dart';
+import '../../../shared/listTileMaintenance.dart';
 
 class RemoveItem extends StatefulWidget {
   const RemoveItem({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _RemoveItemState extends State<RemoveItem> {
                             _nameController.clear();
                           });
                         },
-                        icon: _itemName.isNotEmpty ? const Icon(Icons.cancel) : Container()
+                        icon: _itemName.isNotEmpty ? const Icon(Icons.cancel_outlined) : Container()
                     )
                 ),
                 onChanged: (val) {

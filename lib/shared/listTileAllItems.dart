@@ -6,7 +6,7 @@ import '../constants/paths.dart';
 import '../constants/routes.dart';
 import '../models/item.dart';
 import '../pages/dashboard/maintenance/registeritem.dart';
-import 'entryMode.dart';
+import '../constants/entryMode.dart';
 
 class AllItemListTile extends StatefulWidget {
   const AllItemListTile({Key? key, required this.id, required this.itemModel}) : super(key: key);
@@ -64,7 +64,8 @@ class _AllItemListTileState extends State<AllItemListTile> {
             onPressed: () async {
 
               Map<String, dynamic> data = {
-                ItemModel.fieldAmount : widget.itemModel.amount + 1
+                ItemModel.fieldAmount : widget.itemModel.amount + 1,
+                ItemModel.fieldTag : ItemModel.getTag(amount: widget.itemModel.amount + 1, threshold: widget.itemModel.threshold)
               };
 
               await DatabaseService(path: Paths.items).updateEntry(data, widget.id);
@@ -77,7 +78,8 @@ class _AllItemListTileState extends State<AllItemListTile> {
             onPressed: () async {
               if (widget.itemModel.amount > 0) {
                 Map<String, dynamic> data = {
-                  ItemModel.fieldAmount : widget.itemModel.amount - 1
+                  ItemModel.fieldAmount : widget.itemModel.amount - 1,
+                  ItemModel.fieldTag : ItemModel.getTag(amount: widget.itemModel.amount - 1, threshold: widget.itemModel.threshold)
                 };
                 await DatabaseService(path: Paths.items).updateEntry(data, widget.id);
               }

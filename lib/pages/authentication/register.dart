@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_observer/services/authentication.dart';
 
-import '../../shared/errorcard.dart';
-import '../../shared/fields.dart';
+import '../../shared/cardError.dart';
+import '../../shared/sharedDecoration.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key, required this.toggleView}) : super(key: key);

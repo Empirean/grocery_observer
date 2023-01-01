@@ -10,11 +10,12 @@ extension ItemQuery on Query<ItemModel> {
   Query<ItemModel> queryBy(ItemQueryModes query, {String queryText=""}){
     switch (query) {
       case ItemQueryModes.low :
-        return where(ItemModel.fieldAmount, isLessThanOrEqualTo: ItemModel.fieldThreshold);
+        return where(ItemModel.fieldName,  isGreaterThanOrEqualTo: queryText, isLessThanOrEqualTo: "${queryText}z").
+          where(ItemModel.fieldTag, isEqualTo: ItemModel.tagLow).
+          orderBy(ItemModel.fieldName, descending: false);
       case ItemQueryModes.itemName :
         return where(ItemModel.fieldName,  isGreaterThanOrEqualTo: queryText, isLessThanOrEqualTo: "${queryText}z").
           orderBy(ItemModel.fieldName, descending: false);
-
     }
 
   }

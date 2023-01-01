@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/registeritem.dart';
 import 'package:grocery_observer/services/database.dart';
-import 'package:grocery_observer/shared/entryMode.dart';
+import 'package:grocery_observer/constants/entryMode.dart';
 
 import '../constants/paths.dart';
 import '../constants/routes.dart';
@@ -70,7 +70,7 @@ class _MaintenanceListTileState extends State<MaintenanceListTile> {
               color: Theme.of(context).canvasColor
             ),
           ),
-          subtitle: Text("Remaining: ${widget.itemModel.amount.toString()} ${widget.itemModel.uom}/ Threshold: ${widget.itemModel.threshold.toString()} ${widget.itemModel.uom}",
+          subtitle: Text("Remaining: ${widget.itemModel.amount.toString()} ${widget.itemModel.uom}/Threshold: ${widget.itemModel.threshold.toString()} ${widget.itemModel.uom}",
             textAlign: TextAlign.end,
             style: TextStyle(
                 color: Theme.of(context).canvasColor

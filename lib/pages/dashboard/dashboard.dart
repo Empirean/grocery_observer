@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_observer/pages/dashboard/items/items.dart';
-import 'package:grocery_observer/pages/dashboard/lowitems/lowitems.dart';
+import 'package:grocery_observer/pages/dashboard/lowitems/shoppingList.dart';
 import 'package:grocery_observer/pages/dashboard/maintenance/maintenance.dart';
 import 'package:grocery_observer/pages/dashboard/movement/movement.dart';
 import 'package:grocery_observer/services/authentication.dart';
@@ -17,14 +17,14 @@ class _DashboardState extends State<Dashboard> {
   int _currentIndex = 0;
 
   final List<Widget> _widgetList = <Widget>[
-    const LowItems(),
+    const ShoppingList(),
     const Items(),
     const Maintenance(),
     const Movement()
   ];
 
   final List<String> _widgetTitles = [
-    "Low Items",
+    "Shopping List",
     "All Items",
     "Maintenance",
     "Movement"
@@ -49,18 +49,23 @@ class _DashboardState extends State<Dashboard> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-                child: Text("Observer")
+            DrawerHeader(
+                decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor
+                ),
+                child: const Text("Observer")
             ),
             ListTile(
-              title: const Text("Low"),
+              title: const Text("Shopping List"),
+              leading: const Icon(Icons.checklist_rounded),
               onTap: () {
                 updatePage(0);
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: const Text("Items"),
+              title: const Text("All Items"),
+              leading: const Icon(Icons.category_rounded),
               onTap: () {
                 updatePage(1);
                 Navigator.pop(context);
@@ -68,6 +73,7 @@ class _DashboardState extends State<Dashboard> {
             ),
             ListTile(
               title: const Text("Maintenance"),
+              leading: const Icon(Icons.build_rounded),
               onTap: () {
                 updatePage(2);
                 Navigator.pop(context);

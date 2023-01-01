@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_observer/services/authentication.dart';
-import 'package:grocery_observer/shared/errorcard.dart';
-import 'package:grocery_observer/shared/fields.dart';
+import 'package:grocery_observer/shared/cardError.dart';
+import 'package:grocery_observer/shared/sharedDecoration.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key, required this.toggleView}) : super(key: key);
