@@ -88,7 +88,7 @@ class _AllItemListTileState extends State<AllItemListTile> {
               color: Theme.of(context).canvasColor,
             )
           ),
-          subtitle: Text("Remaining: ${widget.itemModel.amount.toString()} ${widget.itemModel.uom}",
+          subtitle: Text("Remaining: ${widget.itemModel.amount.toString()} ${widget.itemModel.uom}/Threshold: ${widget.itemModel.threshold.toString()} ${widget.itemModel.uom}",
             textAlign: TextAlign.end,
             style: TextStyle(
               color: Theme.of(context).canvasColor

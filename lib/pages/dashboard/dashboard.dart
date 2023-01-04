@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
     const ShoppingList(),
     const Items(),
     const Maintenance(),
-    const Movement()
+    // const Movement()
   ];
 
   final List<String> _widgetTitles = [
@@ -53,7 +53,12 @@ class _DashboardState extends State<Dashboard> {
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor
                 ),
-                child: const Text("Observer")
+                child: Text("Grocery Observer",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Theme.of(context).canvasColor
+                  ),
+                )
             ),
             ListTile(
               title: const Text("Shopping List"),
@@ -79,6 +84,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
               },
             ),
+            /*
             ListTile(
               title: const Text("Movement"),
               onTap: () {
@@ -86,6 +92,7 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.pop(context);
               },
             ),
+            */
           ],
         ),
       ),

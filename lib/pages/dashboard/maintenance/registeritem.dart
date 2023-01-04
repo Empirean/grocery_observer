@@ -60,8 +60,8 @@ class _RegisterItemState extends State<RegisterItem> {
                 },
                 controller: _nameController,
                 decoration: fieldStyle.copyWith(
-                    hintText: "item name",
-                    labelText: "item name"
+                    hintText: "item",
+                    labelText: "item"
                 ),
                 onChanged: (val) {
                   _itemName = val;

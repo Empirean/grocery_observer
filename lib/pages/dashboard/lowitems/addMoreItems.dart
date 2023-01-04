@@ -109,7 +109,7 @@ class _AddMoreItemsState extends State<AddMoreItems> {
                     uom: "LB"
                   ),
                   id: "",
-                  mode: EntryMode.edit,
+                  mode: EntryMode.add,
                 ),
                 "title" : "Add Item"
               }
